@@ -105,6 +105,34 @@ class CPU:
     def jeq(self, op_a, op_b):
         if self.reg[self.fl] == 1:
             return self.jmp(op_a, 0)
+    
+    def annd(self, op_a, op_b):
+        self.reg[op_a] = self.reg[op_a] & self.reg[op_b]
+
+    def oor(self, op_a, op_b):
+        self.reg[op_a] = self.reg[op_a] | self.reg[op_b]
+
+    def xor(self, op_a, op_b):
+        self.reg[op_a] = self.reg[op_a] ^ self.reg[op_b]
+
+    def nnot(self, op_a, op_b):
+        self.reg[op_a] = -(self.reg[op_a] + self.reg[op_b])
+
+    def shl(self, op_a, op_b):
+        self.reg[op_a] = self.reg[op_a] << self.reg[op_b]
+
+    def shr(self, op_a, op_b):
+        self.reg[op_a] = self.reg[op_a] >> self.reg[op_b]
+
+    def mod(self, op_a, op_b):
+        if(op_b == 0):
+            print("Error second operator is invalid")
+            sys.exit()
+        else:
+            self.reg[op_a] = self.reg[op_a] % self.reg[op_b]
+
+    def add(self, op_a, op_b):
+        self.reg[op_a] = self.reg[op_a] + self.reg[op_b]
 
     def ram_read(self, address):
         return self.ram[address]
